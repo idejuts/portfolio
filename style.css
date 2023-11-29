@@ -1,0 +1,203 @@
+body {
+    background-color: white;
+    color: black;
+}
+
+.container {  display: grid;
+    font-family: "Century Gothic";
+    justify-content: center;
+    grid-template-columns: 1.5fr 0.5fr 1fr;
+    grid-template-rows: 10px 100px 100px 100px 100px 100px;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    ". . ."
+    ". . ."
+    "Idejuts Portfelis b1"
+    "Idejuts Kartupelis b2"
+    ". . ."
+    "Kontakti . Night"; 
+  }
+  
+  .Idejuts { 
+    grid-area: Idejuts; 
+    justify-self: center; 
+  align-self: center; 
+  font-size: 50px;
+  font-family: "Century Gothic";
+  
+}
+  
+  .Portfelis { 
+    grid-area: Portfelis; 
+    justify-self: left; 
+  align-self: center; 
+  font-size: 30px;
+  font-family: "Century Gothic";
+  border-left: 1px solid black;
+  padding-left: 20px;
+  cursor: pointer;
+}
+  
+  .Kartupelis { 
+    grid-area: Kartupelis; 
+    justify-self: left; 
+  align-self: center; 
+  font-size: 30px;
+  font-family: "Century Gothic";
+  border-left: 1px solid black;
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.Kontakti { 
+    grid-area: Kontakti; 
+    justify-self: center; 
+    
+}
+.Night { 
+    grid-area: Night; 
+    justify-self: left; 
+    cursor: pointer;
+}
+
+#b1 {
+  grid-area: b1; 
+  justify-self: left; 
+  align-self: center;
+  font-size: 30px;
+  font-family: "Century Gothic";
+  border-left: 1px solid black;
+  margin: 40px;
+  
+}
+
+#b2 {
+  grid-area: b2; 
+  justify-self: left; 
+  align-self: center;
+  font-size: 30px;
+  font-family: "Century Gothic";
+  border-left: 1px solid black;
+  margin: 40px;
+  
+
+}
+  
+.dark-mode {
+    background-color: black;
+    color: white;
+  }
+
+  .Night:hover {
+    transform: scale(1.02);
+  }
+
+  .Kartupelis:hover {
+    
+    transform: scale(1.2);
+  }
+  .Portfelis:hover {
+    transform: scale(1.2);
+  }
+
+  .containerTab {
+    margin-left: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: black;
+    justify-self: right; 
+    
+  }
+
+
+/* Closable button inside the image */
+.closebtn {
+  float: right;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+
+
+@keyframes typing {
+  
+
+ 
+  55.8372%, 74.0698% { content: "e"; }
+  56.9767%, 72.9302% { content: "ej"; }
+  58.1163%, 71.7907% { content: "ejo"; }
+  59.2558%, 70.6512% { content: "ejot"; }
+  60.3953%, 69.5116% { content: "ejoti"; }
+  61.5349%, 68.3721% { content: "ejotis"; }
+  62%, 67% { content: "ejotism"; }
+  63%, 66% { content: "ejotisms"; }
+ 
+  
+  78.6279%, 96.8605% { content: "i"; }
+  79.7674%, 95.7209% { content: "io"; }
+  80.9070%, 94.5814% { content: "iot"; }
+  
+
+  31.9070%, 50.1395% { content: "i"; }
+  33.0465%, 49.0000% { content: "io"; }
+  34.1860%, 47.8605% { content: "iot"; }
+  35.3256%, 46.7209% { content: "iots"; }
+ 
+  1.1395%, 26.2093% { content: "e"; }
+  2.2791%, 25.0698% { content: "ej"; }
+  3.4186%, 23.9302% { content: "eju"; }
+  4.5581%, 22.7907% { content: "ejut"; }
+  5.6977%, 21.6512% { content: "ejuts"; }
+
+
+ 
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter {
+  --caret: currentcolor;
+}
+
+.typewriter::before {
+  content: "";
+  animation: typing 13.5s infinite;
+}
+
+.typewriter::after {
+  content: "";
+  border-right: 1px solid var(--caret);
+  animation: blink 0.5s linear infinite;
+}
+
+.typewriter.thick::after {
+  border-right: 1ch solid var(--caret);
+}
+
+.typewriter.nocaret::after {
+  border-right: 0;
+}
+
+
+@media (prefers-reduced-motion) {
+  .typewriter::after {
+    animation: none;
+  }
+  
+  @keyframes sequencePopup {
+    0%, 100% { content: "ejuts"; }
+    25% { content: "iots"; }
+    50% { content: "reader"; }
+    75% { content: "human"; }
+  }
+
+  .typewriter::before {
+    content: "ejuts";
+    animation: sequencePopup 12s linear infinite;
+  }
+}

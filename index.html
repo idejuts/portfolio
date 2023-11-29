@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js.js"></script>
+    <title>Idejutisms</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon_io\apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon_io\favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon_io\favicon-16x16.png"
+    />
+    <link rel="manifest" href="favicon_io\site.webmanifest" />
+  </head>
+  <body>
+    <main class="container">
+      <div class="Idejuts">
+        <h1 aria-label="Idejutisms">
+          Id<span class="typewriter nocaret"></span></h1>
+      </div>
+      <div class="Portfelis" onclick="openTab('b1');">Portfelis</div>
+
+      <!-- The expanding grid (hidden by default) -->
+      <div id="b1" class="containerTab" style="display:none;background:gray">
+        <!-- If you want the ability to close the container, add a close button
+        <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span> -->
+        <p>Šī lapa</p>
+      </div>
+
+      <div class="Kartupelis" onclick="openTab('b2');">Kartupelis</div>
+      <div id="b2" class="containerTab" style="display:none;background:gray">
+        <!-- <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span> -->
+        <p>🥔</p>
+      </div>
+
+      <div class="Kontakti">✉️ idejuts@gmail.com</div>
+      <div onclick="myFunction()" class="Night">🌓 Nakts</div>
+    </main>
+  </body>
+</html>
