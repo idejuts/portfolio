@@ -13,7 +13,7 @@
     <style>
 :root {
     --mainRed: #E1524C;
-    --mainLight: #E0A3A1;
+    --mainLight: #e0a3a15c;
 }
 
 #distance {
@@ -34,8 +34,9 @@
       #0000 0 calc(150%/13),var(--mainLight) 0 calc(200%/13),
       #0000 0 calc(250%/13),var(--mainLight) 0 calc(300%/13)),repeating-linear-gradient(-45deg,#0000 calc(-650%/13) calc(50%/13),var(--mainLight) 0 calc(100%/13),
       #0000 0 calc(150%/13),var(--mainLight) 0 calc(200%/13),
-      #0000 0 calc(250%/13),var(--mainLight) 0 calc(300%/13)) 32px 32px #bbbbbb9c;
+      #0000 0 calc(250%/13),var(--mainLight) 0 calc(300%/13)) 32px 32px #bbbbbb25;
 background-size: 64px 64px;
+
 
     --mask: 
     conic-gradient(from calc(180deg - var(--a)/2) at top,
@@ -103,7 +104,7 @@ background-size: 64px 64px;
            border: 1px solid var(--mainRed);
            border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  padding: 10px 14px;
+  padding: 14px 14px;
         }
 
 .button-rest {
@@ -165,11 +166,17 @@ background-size: 64px 64px;
             border-bottom: 10px solid var(--mainRed);
         }
 
+        #weather-widget {
+            position: fixed;
+    top: 10px;
+    right: 10px;
+        }
         
     </style>
 </head>
 <body>
 <div class="container zig-zag">
+    <div id="weather-widget">Loading...</div>
     <div class="mainContent animate__animated animate__fadeInLeftBig">
         <img id="logo" class="animate__animated animate__fadeInLeftBig" src="logo.png">
         <div id="content" class="content">...</div>
@@ -198,6 +205,30 @@ background-size: 64px 64px;
 <div id="map"style="height: 400px;"></div>
 
 <script>
+
+const apiKey = '95b159e04ac66106416935a34bcd0a00';
+// Replace 'YOUR_CITY' with the name of the city you want the weather for
+const city = 'Valmiera';
+const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+// Fetch weather data from OpenWeatherMap API
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        // Extract relevant weather information
+        const temperature = data.main.temp;
+        const clouds = data.weather[0].description;
+        
+        // Display weather information on the webpage
+        const weatherWidget = document.getElementById('weather-widget');
+        weatherWidget.innerHTML = `${temperature.toFixed(0)}°C`;
+    })
+    .catch(error => {
+        console.error('Error fetching weather data:', error);
+        // Display error message on the webpage
+        const weatherWidget = document.getElementById('weather-widget');
+        weatherWidget.innerHTML = 'Failed to fetch weather data';
+    });
     
     let content = "Ready to Walk n Talk? ;)\nPick a Topic, Truth or Dare or an Interesting Fact... \n\nIdejutsCorporation Copyright 2024-2024 ©";
     let distance = 0;
