@@ -3,19 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Activity Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px; /* Set the height of the map */
+            width: 100%; /* Set the width of the map */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .mainContent {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .buttonContainer {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .distance {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <main>
-        <div class="dark-mode-slider">
-            <input type="range" min="0" max="99" value="15" class="slider" id="colorSlider">
-          </div>
-        <div class="logo">
-            <h1>Idejuts</h1>
-        </div>
-        <div class="portfolio"></div>
-    </main>
-    <script src="myscripts.js"></script>
+<div class="container">
+    <div class="mainContent">
+        <div id="content" class="content"></div>
+        <div id="distance" class="distance">Traversed Distance: 0 km</div>
+    </div>
+    <div class="buttonContainer">
+        <button onclick="handleActivityPress('Theme')">Theme</button>
+        <button onclick="handleActivityPress('ToD')">ToD</button>
+        <button onclick="handleActivityPress('Facts')">Facts</button>
+    </div>
+    <div class="buttonContainer">
+        <button onclick="handleStartTracking()">Start Tracking</button>
+        <button onclick="handleDistanceInput()">Set Distance</button>
+    </div>
+    <div id="errorMsg"></div>
+</div>
+<div id="map" style="height: 400px;"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    let content = '';
+    let distance = 0;
+    let selectedActivity = '';
+    let traversedDistance = 0;
+    let errorMsg = '';
+    let location = null;
+
+    const themes = ["Theme 1", "Theme 2", "Theme 3"];
+    const questions = ["Question 1", "Question 2", "Question 3"];
+    const dares = ["Dare 1", "Dare 2", "Dare 3"];
+    const facts = ["Fact 1", "Fact 2", "Fact 3"];
+
+    const handleActivityPress = (activity) => {
+        selectedActivity = activity;
+        switch (activity) {
+            case 'Theme':
+                content = themes[Math.floor(Math.random() * themes.length)];
+                break;
+            case 'ToD':
+                content = Math.random() < 0.5 ? questions[Math.floor(Math.random() * questions.length)] : dares[Math.floor(Math.random() * dares.length)];
+                break;
+            case 'Facts':
+                content = facts[Math.floor(Math.random() * facts.length)];
+                break;
+            default:
+                break;
+        }
+        render();
+    };
+
+    const handleStartTracking = async () => {
+        // Logic for starting location tracking
+        content = 'Tracking enabled';
+        render();
+    };
+
+    const handleDistanceInput = () => {
+        // Logic for distance input
+        content = 'Question every 100m';
+        render();
+    };
+
+    const render = () => {
+        document.getElementById('content').innerText = content;
+        document.getElementById('distance').innerText = `Traversed Distance: ${traversedDistance.toFixed(2)} km`;
+        document.getElementById('errorMsg').innerText = errorMsg;
+    };
+
+    // Mock implementation of location tracking and distance calculation
+    setInterval(() => {
+        location = {
+            latitude: Math.random() * 90,
+            longitude: Math.random() * 180
+        };
+        const newDistance = calculateDistance(location.latitude, location.longitude);
+        traversedDistance = newDistance;
+        if (traversedDistance > 0 && traversedDistance % 100 === 0) {
+            triggerToDNotification();
+            handleActivityPress('ToD');
+        }
+        render();
+    }, 1000);
+
+    const calculateDistance = (lat2, lon2) => {
+        const lat1 = location ? location.latitude : 0;
+        const lon1 = location ? location.longitude : 0;
+        const R = 6371e3;
+        const φ1 = (lat1 * Math.PI) / 180;
+        const φ2 = (lat2 * Math.PI) / 180;
+        const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+        const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+        const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return Math.round(R * c / 1000);
+    };
+
+    const triggerToDNotification = async () => {
+        // Logic for triggering notification
+    };
+
+    // Initialize the map
+    var map = L.map('map').setView([0, 0], 15);
+
+    // Add OpenStreetMap tile layer to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Get current geolocation
+    navigator.geolocation.getCurrentPosition(function (position) {
+        var currentLocation = [position.coords.latitude, position.coords.longitude];
+
+        // Set the map view to the current location
+        map.setView(currentLocation);
+
+        // Add a marker at the current location
+        L.marker(currentLocation).addTo(map);
+    });
+</script>
 </body>
 </html>
