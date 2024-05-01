@@ -7,13 +7,36 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
-        #map {
-            height: 50%; /* Set the height of the map */
-            width: 100%; /* Set the width of the map */
-        }
+:root {
+    --mainRed: #E1524C;
+    --mainLight: #E0A3A1;
+}
+
+#distance {
+    color: white;
+}
+
+.zig-zag {
+    --a: 90deg; /* the angle of the spikes*/
+  --s: 10px;  /* the size of spikes*/
+    background-color: var(--mainLight);
+    --mask: 
+    conic-gradient(from calc(180deg - var(--a)/2) at top,
+      #0000,#000 1deg var(--a),#0000 calc(var(--a) + 1deg)) 
+    50%/var(--s);
+    --mask: 
+    conic-gradient(from calc(var(--a)/-2) at bottom,
+      #0000,#000 1deg var(--a),#0000 calc(var(--a) + 1deg)) /* I am adding 1deg to avoid visual glitch */
+    50%/var(--s);
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+}
+      
+      
+
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -24,12 +47,17 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+ 
         }
 
         .mainContent {
+            
             text-align: center;
             margin-bottom: 20px;
-        }
+            
+}
+
+
 
         .buttonContainer {
             display: flex;
@@ -40,38 +68,101 @@
         .content {
             font-size: 18px;
             margin-bottom: 10px;
+            width: auto;
+            height: 150px;
+           
         }
+
+.button-rest {
+    background: var(--mainRed);
+  border: 1px solid var(--mainRed);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  font-weight: 600;
+  padding: 2px 4px;
+}
+
+.button-24 {
+  background: var(--mainRed);
+  border: 2px solid black;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: var(--mainRed);
+}
+
+.button-24:active {
+  opacity: .5;
+}
 
         .distance {
             font-size: 16px;
             margin-bottom: 10px;
         }
+
+        #logo {
+            margin-bottom: 10vw;
+        }
+
+        
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container zig-zag">
     <div class="mainContent">
-        <div id="content" class="content"></div>
-        <div id="distance" class="distance">Traversed Distance: 0 km</div>
+        <img id="logo" src="logo.png">
+        <div id="content" class="content">...</div>
+        
     </div>
     <div class="buttonContainer">
-        <button onclick="handleActivityPress('Theme')">Theme</button>
-        <button onclick="handleActivityPress('ToD')">ToD</button>
-        <button onclick="handleActivityPress('Facts')">Facts</button>
+        <button class="button-24" onclick="handleActivityPress('Theme')">Theme</button>
+        <button class="button-24" onclick="handleActivityPress('ToD')">ToD</button>
+        <button class="button-24" onclick="handleActivityPress('Facts')">Facts</button>
     </div>
     <div class="buttonContainer">
-        <button onclick="startTracking()" id="startTrackingBtn">Start Tracking</button>
-        <button onclick="stopTracking()" id="stopTrackingBtn" disabled>Stop Tracking</button>
+    <div class="button-rest" id="distance" class="distance">Traversed Distance: 0 km</div>
+</div>
+    <div class="buttonContainer">
+        
+        <button class="button-rest" onclick="startTracking()" id="startTrackingBtn">Start Tracking</button>
+        <button class="button-rest" onclick="stopTracking()" id="stopTrackingBtn" disabled>Stop Tracking</button>
     </div>
     <div class="buttonContainer">
-        <button onclick="handleDistanceInput()">Set Distance</button>
+        
+        <button class="button-rest" onclick="handleDistanceInput()">Set Distance</button>
     </div>
     <div id="errorMsg"></div>
+    
 </div>
-<div id="map" style="height: 400px;"></div>
+<div id="map"style="height: 400px;"></div>
 
 <script>
-    let content = '';
+    let content = 'Ready to Walk n Talk? ;)';
     let distance = 0;
     let selectedActivity = '';
     let traversedDistance = 0;
