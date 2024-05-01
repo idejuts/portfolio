@@ -6,6 +6,10 @@
     <title>Activity Tracker</title>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <style>
 :root {
     --mainRed: #E1524C;
@@ -19,7 +23,20 @@
 .zig-zag {
     --a: 90deg; /* the angle of the spikes*/
   --s: 10px;  /* the size of spikes*/
-    background-color: var(--mainLight);
+    
+    background:
+      repeating-linear-gradient( 45deg,#0000 calc(-650%/13) calc(50%/13), var(--mainLight) 0 calc(100%/13),
+      #0000 0 calc(150%/13),var(--mainLight) 0 calc(200%/13),
+      #0000 0 calc(250%/13),var(--mainLight) 0 calc(300%/13)),repeating-linear-gradient( 45deg,#0000 calc(-650%/13) calc(50%/13),var(--mainLight) 0 calc(100%/13),
+      #0000 0 calc(150%/13),var(--mainLight) 0 calc(200%/13),
+      #0000 0 calc(250%/13),var(--mainLight) 0 calc(300%/13)) 32px 32px,
+      repeating-linear-gradient(-45deg,#0000 calc(-650%/13) calc(50%/13), var(--mainLight) 0 calc(100%/13),
+      #0000 0 calc(150%/13),var(--mainLight) 0 calc(200%/13),
+      #0000 0 calc(250%/13),var(--mainLight) 0 calc(300%/13)),repeating-linear-gradient(-45deg,#0000 calc(-650%/13) calc(50%/13),var(--mainLight) 0 calc(100%/13),
+      #0000 0 calc(150%/13),var(--mainLight) 0 calc(200%/13),
+      #0000 0 calc(250%/13),var(--mainLight) 0 calc(300%/13)) 32px 32px #bbbbbb9c;
+background-size: 64px 64px;
+
     --mask: 
     conic-gradient(from calc(180deg - var(--a)/2) at top,
       #0000,#000 1deg var(--a),#0000 calc(var(--a) + 1deg)) 
@@ -36,9 +53,15 @@
 
 
         body {
-            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            border: 5px ridge var(--mainRed);
+            filter: blur(0.2px);
+            filter: brightness(95%) contrast(110%) saturate(120%);
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+            backdrop-filter: blur(10px);
+            mix-blend-mode: overlay;
         }
 
         .container {
@@ -46,7 +69,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: 99svh;
  
         }
 
@@ -63,14 +86,24 @@
             display: flex;
             justify-content: space-around;
             margin-bottom: 20px;
+            
         }
 
         .content {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 18px;
+            font-weight: 600;
             margin-bottom: 10px;
             width: auto;
             height: 150px;
-           
+           background-color: rgba(255, 255, 255, 0.716);
+           border: 1px solid var(--mainRed);
+           border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  padding: 10px 14px;
         }
 
 .button-rest {
@@ -80,6 +113,7 @@
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
   font-weight: 600;
   padding: 2px 4px;
+  
 }
 
 .button-24 {
@@ -93,7 +127,7 @@
   color: #FFFFFF;
   cursor: pointer;
   display: inline-block;
-  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   font-weight: 800;
   line-height: 16px;
@@ -111,7 +145,7 @@
 
 .button-24:hover,
 .button-24:active {
-  background-color: initial;
+  background-color: rgba(255, 255, 255, 0.81);
   background-position: 0 0;
   color: var(--mainRed);
 }
@@ -126,7 +160,9 @@
         }
 
         #logo {
+            margin-top: 10vw;
             margin-bottom: 10vw;
+            border-bottom: 10px solid var(--mainRed);
         }
 
         
@@ -134,27 +170,27 @@
 </head>
 <body>
 <div class="container zig-zag">
-    <div class="mainContent">
-        <img id="logo" src="logo.png">
+    <div class="mainContent animate__animated animate__fadeInLeftBig">
+        <img id="logo" class="animate__animated animate__fadeInLeftBig" src="logo.png">
         <div id="content" class="content">...</div>
         
     </div>
-    <div class="buttonContainer">
-        <button class="button-24" onclick="handleActivityPress('Theme')">Theme</button>
+    <div class="buttonContainer animate__animated animate__fadeInLeftBig">
+        <button class="button-24" onclick="handleActivityPress('Theme')">Topic</button>
         <button class="button-24" onclick="handleActivityPress('ToD')">ToD</button>
         <button class="button-24" onclick="handleActivityPress('Facts')">Facts</button>
     </div>
-    <div class="buttonContainer">
+    <div class="buttonContainer animate__animated animate__fadeInLeftBig">
     <div class="button-rest" id="distance" class="distance">Traversed Distance: 0 km</div>
 </div>
-    <div class="buttonContainer">
+    <div class="buttonContainer animate__animated animate__fadeInLeftBig">
         
         <button class="button-rest" onclick="startTracking()" id="startTrackingBtn">Start Tracking</button>
         <button class="button-rest" onclick="stopTracking()" id="stopTrackingBtn" disabled>Stop Tracking</button>
     </div>
     <div class="buttonContainer">
         
-        <button class="button-rest" onclick="handleDistanceInput()">Set Distance</button>
+        <button class="button-rest animate__animated animate__fadeInLeftBig" onclick="handleDistanceInput()">Set Distance</button>
     </div>
     <div id="errorMsg"></div>
     
@@ -162,7 +198,8 @@
 <div id="map"style="height: 400px;"></div>
 
 <script>
-    let content = 'Ready to Walk n Talk? ;)';
+    
+    let content = "Ready to Walk n Talk? ;)\nPick a Topic, Truth or Dare or an Interesting Fact... \n\nIdejutsCorporation Copyright 2024-2024 ©";
     let distance = 0;
     let selectedActivity = '';
     let traversedDistance = 0;
@@ -170,10 +207,82 @@
     let currentLocation = null;
     let trackingInterval = null;
 
-    const themes = ["Theme 1", "Theme 2", "Theme 3"];
-    const questions = ["Question 1", "Question 2", "Question 3"];
-    const dares = ["Dare 1", "Dare 2", "Dare 3"];
-    const facts = ["Fact 1", "Fact 2", "Fact 3"];
+    const themes = ["The science behind laughter and why humans find certain things funny.", 
+    "The world of competitive eating and the records set by participants.", 
+    "Untranslatable words from different languages that capture unique feelings or concepts.",
+"Conspiracy theories that have gained traction over the years, from Area 51 to the moon landing.",
+"The psychology of dreams and common dream symbols.",
+"Strange museums around the world, such as the Museum of Broken Relationships in Croatia.",
+"Superstitions and their origins, like the belief in Friday the 13th being unlucky.",
+"The art of extreme ironing, where people iron clothes in the most unusual locations.",
+"Unique cultural festivals, such as the La Tomatina tomato-throwing festival in Spain.",
+"The world's weirdest sports, like underwater hockey or toe wrestling.",
+"The psychology of attraction and the science behind love at first sight.",
+"The world of competitive gaming and esports.",
+"Weird facts about the human body, like the fact that your nose can remember 50,000 different scents.",
+"The most unusual jobs people have had throughout history, from professional mourners to pet food tasters.",
+"Fantasy scenarios or role-playing ideas to spice up your love life.",
+"Steamy scenes from movies or books that turn you on.",
+"The art of seduction.",
+"Dirty talk during sex.",
+"Fantasy destinations for a romantic getaway: exotic or cozy cabin?",
+"Movie night: comedy or thriller?",
+"Perfect date night: fancy restaurant or cozy home-cooked meal?",
+"Favorite season: summer or winter?",
+"Morning routine: early riser or snooze button addict?",
+"Dream home: modern loft or countryside cottage?",
+"Spirituality: religious or agnostic?",
+"Environmental awareness: sustainable living or convenience?",
+"Health and wellness: holistic approach or conventional medicine?"];
+
+    const questions = ["What's the most embarrassing thing you've ever done in public?", 
+    "What's your most bizarre talent?", 
+    "What's the weirdest dream you've ever had?",
+"What's the strangest place you've ever fallen asleep?",
+"Have you ever stalked someone on social media?",
+"Have you ever pretended to like a gift you actually hated?",
+"What's your biggest fear that others might find silly?",
+"What's the boldest thing you've ever done in the bedroom?",
+"What's your ultimate fantasy that you've been too shy to share?",
+"Have you ever had a one-night stand, and if so, what was it like?",
+"Describe your most intense orgasm in vivid detail.",
+"Have you ever fantasized about someone else while we were together?",
+"What's the wildest place you've ever made love?",
+"Describe your favorite role-play scenario or character to play in the bedroom.",
+"What's the hottest sext you've ever sent or received?",
+"What's the sexiest outfit you've ever worn, or would like to see your partner in?"];
+
+
+    const dares = ["Call a random contact in your phone and sing 'Happy Birthday' to them.", 
+    "Do your best impression of a famous celebrity.", 
+    "Act like a chicken until your next turn.",
+"Go outside and shout 'I'm the king/queen of the world!' at the top of your lungs.",
+"Try to breakdance for one minute, even if you've never tried it before.",
+"Give your partner a sensual massage for five minutes.",
+"Use your tongue to write your partner's name on their body (with consent, of course!).",
+"Share a passionate kiss with your partner for at least 30 seconds.",
+"Take a provocative selfie and send it to your partner.",
+"Give your partner a lap dance or strip tease.",
+"Role-play a scenario where you're strangers meeting in a bar and trying to seduce each other.",
+"Find a picturesque spot to take a daring nude photo together (if you're comfortable and it's legal).",
+"Find a private clearing and skinny-dip together in a secluded stream or lake.",
+"Play a game of strip hiking: for every milestone reached (e.g., every 100 meters), remove an article of clothing.",
+"Engage in some outdoor yoga together, focusing on poses that promote intimacy and connection.",
+"Challenge each other to a race to the top of a hill or peak, with the loser having to fulfill a spicy dare of the winner's choosing."];
+
+
+    const facts = ["The shortest war in history lasted only 38 minutes between Britain and Zanzibar in 1896.", 
+    "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible.", 
+    "Bananas are berries, but strawberries aren't technically berries - they're classified as 'aggregate fruits.'",
+"Octopuses have three hearts and blue blood.",
+"The Eiffel Tower can be 15 cm taller during the summer due to thermal expansion.",
+"Scotland's national animal is the unicorn.",
+"There are more possible iterations of a game of chess than there are atoms in the observable universe.",
+"It's impossible to hum while holding your nose.",
+"There is a species of jellyfish that is biologically immortal, meaning it doesn't age and can theoretically live forever.",
+"The fingerprints of a koala are so indistinguishable from humans that they have on occasion been confused at crime scenes in Australia.",
+"The average person spends six months of their lifetime waiting for red lights to turn green.",
+];
 
     const handleActivityPress = (activity) => {
         selectedActivity = activity;
