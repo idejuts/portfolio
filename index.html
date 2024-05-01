@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
         #map {
-            height: 100%; /* Set the height of the map */
-            width: 300; /* Set the width of the map */
+            height: 50%; /* Set the height of the map */
+            width: 100%; /* Set the width of the map */
         }
 
         body {
@@ -60,6 +60,10 @@
         <button onclick="handleActivityPress('Facts')">Facts</button>
     </div>
     <div class="buttonContainer">
+        <button onclick="startTracking()" id="startTrackingBtn">Start Tracking</button>
+        <button onclick="stopTracking()" id="stopTrackingBtn" disabled>Stop Tracking</button>
+    </div>
+    <div class="buttonContainer">
         <button onclick="handleDistanceInput()">Set Distance</button>
     </div>
     <div id="errorMsg"></div>
@@ -73,6 +77,7 @@
     let traversedDistance = 0;
     let errorMsg = '';
     let currentLocation = null;
+    let trackingInterval = null;
 
     const themes = ["Theme 1", "Theme 2", "Theme 3"];
     const questions = ["Question 1", "Question 2", "Question 3"];
@@ -94,6 +99,31 @@
             default:
                 break;
         }
+        render();
+    };
+
+    const startTracking = () => {
+        trackingInterval = setInterval(() => {
+            currentLocation = {
+                latitude: Math.random() * 90,
+                longitude: Math.random() * 180
+            };
+            const newDistance = calculateDistance(currentLocation.latitude, currentLocation.longitude);
+            traversedDistance += newDistance;
+            render();
+        }, 1000);
+        document.querySelector('#map').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('startTrackingBtn').disabled = true;
+        document.getElementById('stopTrackingBtn').disabled = false;
+        content = 'Tracking enabled';
+        render();
+    };
+
+    const stopTracking = () => {
+        clearInterval(trackingInterval);
+        document.getElementById('startTrackingBtn').disabled = false;
+        document.getElementById('stopTrackingBtn').disabled = true;
+        content = 'Tracking stopped';
         render();
     };
 
@@ -174,5 +204,4 @@
     };
 </script>
 </body>
-
 </html>
