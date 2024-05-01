@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activity Tracker</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
         #map {
-            height: 400px; /* Set the height of the map */
-            width: 100%; /* Set the width of the map */
+            height: 100%; /* Set the height of the map */
+            width: 300; /* Set the width of the map */
         }
 
         body {
@@ -59,21 +60,19 @@
         <button onclick="handleActivityPress('Facts')">Facts</button>
     </div>
     <div class="buttonContainer">
-        <button onclick="handleStartTracking()">Start Tracking</button>
         <button onclick="handleDistanceInput()">Set Distance</button>
     </div>
     <div id="errorMsg"></div>
 </div>
 <div id="map" style="height: 400px;"></div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     let content = '';
     let distance = 0;
     let selectedActivity = '';
     let traversedDistance = 0;
     let errorMsg = '';
-    let location = null;
+    let currentLocation = null;
 
     const themes = ["Theme 1", "Theme 2", "Theme 3"];
     const questions = ["Question 1", "Question 2", "Question 3"];
@@ -98,12 +97,6 @@
         render();
     };
 
-    const handleStartTracking = async () => {
-        // Logic for starting location tracking
-        content = 'Tracking enabled';
-        render();
-    };
-
     const handleDistanceInput = () => {
         // Logic for distance input
         content = 'Question every 100m';
@@ -117,23 +110,55 @@
     };
 
     // Mock implementation of location tracking and distance calculation
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            currentLocation = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            };
+            initializeMap();
+        }, error => {
+            errorMsg = `Error getting location: ${error.message}`;
+            render();
+        });
+    } else {
+        errorMsg = 'Geolocation is not supported by this browser.';
+        render();
+    }
+
+    const initializeMap = () => {
+        // initialize Leaflet
+        var map = L.map('map').setView([currentLocation.latitude, currentLocation.longitude], 13);
+
+        // add the OpenStreetMap tiles
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+        }).addTo(map);
+
+        // show the scale bar on the lower left corner
+        L.control.scale({imperial: true, metric: true}).addTo(map);
+
+        // show a marker on the map
+        L.marker([currentLocation.latitude, currentLocation.longitude]).bindPopup('Your Location').addTo(map);
+    };
+
+    // Mock implementation of location tracking and distance calculation
     setInterval(() => {
-        location = {
-            latitude: Math.random() * 90,
-            longitude: Math.random() * 180
-        };
-        const newDistance = calculateDistance(location.latitude, location.longitude);
-        traversedDistance = newDistance;
-        if (traversedDistance > 0 && traversedDistance % 100 === 0) {
-            triggerToDNotification();
-            handleActivityPress('ToD');
+        if (currentLocation) {
+            const newDistance = calculateDistance(currentLocation.latitude, currentLocation.longitude);
+            traversedDistance = newDistance;
+            if (traversedDistance > 0 && traversedDistance % 100 === 0) {
+                triggerToDNotification();
+                handleActivityPress('ToD');
+            }
         }
         render();
     }, 1000);
 
     const calculateDistance = (lat2, lon2) => {
-        const lat1 = location ? location.latitude : 0;
-        const lon1 = location ? location.longitude : 0;
+        const lat1 = currentLocation ? currentLocation.latitude : 0;
+        const lon1 = currentLocation ? currentLocation.longitude : 0;
         const R = 6371e3;
         const φ1 = (lat1 * Math.PI) / 180;
         const φ2 = (lat2 * Math.PI) / 180;
@@ -147,25 +172,7 @@
     const triggerToDNotification = async () => {
         // Logic for triggering notification
     };
-
-    // Initialize the map
-    var map = L.map('map').setView([0, 0], 15);
-
-    // Add OpenStreetMap tile layer to the map
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    // Get current geolocation
-    navigator.geolocation.getCurrentPosition(function (position) {
-        var currentLocation = [position.coords.latitude, position.coords.longitude];
-
-        // Set the map view to the current location
-        map.setView(currentLocation);
-
-        // Add a marker at the current location
-        L.marker(currentLocation).addTo(map);
-    });
 </script>
 </body>
+
 </html>
