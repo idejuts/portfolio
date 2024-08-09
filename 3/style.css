@@ -1,0 +1,222 @@
+:root {
+  --c1: #dededef1;
+  --c2: #8f8f8f9f;
+  --c3: #353535ac;
+  --c4: #161616;
+  --c5: #33051a;
+  --font1: "Cinzel", serif;
+  --font2: "Bruno Ace SC", sans-serif;
+}
+
+html {
+  background-color: var(--c4);
+
+
+  font-family: var(--font2);
+  filter: contrast(111%);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  max-width: 1400px;
+}
+
+#navbar {
+    top: 0;
+}
+.hero-bg {
+  height: 90svh;
+  /* filter: invert(200); */
+background-color: var(--c4);
+  background: repeating-conic-gradient(
+      rgba(0, 0, 0, 0.077) 0%,
+      transparent 0.00003%,
+      transparent 0.0005%,
+      transparent 0.0001%
+    ),
+    repeating-conic-gradient(
+      rgba(255, 255, 255, 0.052) 0%,
+      transparent 0.00005%,
+      transparent 0.00015%,
+      transparent 0.0009%
+    ),
+   
+    linear-gradient(160deg, var(--c1) calc(40% + 20px), var(--c4) 0),
+    linear-gradient(-120deg, var(--c1) calc(70% + 20px), var(--c4) 0);
+    transition: 1s linear;
+}
+
+.mid-bg {
+  height: 100svh;
+  /* filter: invert(200); */
+
+  background: repeating-conic-gradient(
+      rgba(0, 0, 0, 0.077) 0%,
+      transparent 0.00003%,
+      transparent 0.0005%,
+      transparent 0.0001%
+    ),
+    repeating-conic-gradient(
+      rgba(255, 255, 255, 0.052) 0%,
+      transparent 0.00005%,
+      transparent 0.00015%,
+      transparent 0.0009%
+    ),
+    linear-gradient(30deg, var(--c1) calc(50% - 40px), var(--c4) 0),
+    linear-gradient(40deg, var(--c1) calc(10% + 140px), var(--c4) 0);
+}
+
+img {
+  --f: 0.1; /* parallax factor (the smaller the better) */
+  --r: 10px; /* the radius */
+
+  --_f: calc(100% * var(--f) / (1 + var(--f)));
+  --_a: calc(90deg * var(--f));
+
+  width: 250px; /* image size */
+  aspect-ratio: calc(1 + var(--f));
+  object-fit: cover;
+  clip-path: inset(0 var(--_f) 0 0 round var(--r));
+  transform: perspective(400px) translateX(0px) rotateY(var(--_a));
+  transition: 1.5s ease-in-out;
+
+}
+
+img:hover {
+  clip-path: inset(0 0 0 var(--_f) round var(--r));
+  transform: perspective(400px) translateX(calc(-1 * var(--_f)))
+    rotateY(calc(-1 * var(--_a)));
+    
+}
+
+.hero {
+ 
+  margin: 0;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-size: calc(0.6rem + 2svw);
+
+  color: white;
+
+
+  mix-blend-mode: exclusion;
+}
+
+.hero h1 {
+    margin-top: calc(20px + 4svw);
+  border: 50px solid;
+  border-image-source: url(bauh.jpeg);
+  border-image-slice: 250 fill;
+  color: #ffffff;
+  
+
+  text-shadow: .2rem 0.2rem #000000;
+filter: contrast(111%);
+  --f: 0.01; /* parallax factor (the smaller the better) */
+
+
+  --_f: calc(100% * var(--f) / (1 + var(--f)));
+  --_a: calc(90deg * var(--f));
+
+  object-fit: cover;
+  clip-path: inset(0 var(--_f) 0 0);
+
+transition: 1s linear;
+  mix-blend-mode: multiply;
+
+}
+
+.hero h1:hover {
+ /* filter: saturate(5) sepia(4) contrast(110%); */
+      border-image-slice: 60 fill;
+  
+      text-shadow: .3rem 0.5rem var(--c5);
+   
+}
+
+.mid {
+  padding: 0;
+  margin: 0;
+  height: 50svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: calc(1rem + 1svw);
+
+  color: white;
+
+  mix-blend-mode: exclusion;
+}
+
+
+/* Style the header with a grey background and some padding */
+.header {
+    width: auto;
+    overflow: hidden;
+    background-color: var(--c2);
+  
+    mix-blend-mode: difference;
+      }
+  
+  /* Style the header links */
+  .header a {
+    float: left;
+    color: var(--c4);
+    text-align: center;
+    padding: calc(1px + 1svw);
+    margin-right: calc(2px + 2svw);
+    text-shadow: -0.1rem 0.1rem #ffffff;
+    text-decoration: none;
+    font-size: calc(0.5rem + 0.6svw);
+    line-height: 25px;
+    border: 2px solid rgba(245, 222, 179, 0);
+  }
+  
+  /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+  .header a.logo {
+    font-size: calc(0.6rem + 0.6svw);
+    font-weight: bold;
+    margin-left: calc(2px + 2svw);
+    position: sticky;
+  }
+  
+  /* Change the background color on mouse-over */
+  .header a:hover {
+
+    background-color: var(--c5);
+
+    color: black;
+    padding: -20px;
+    border: 2px solid var(--c3);
+    transition: 0.5s;
+  }
+  
+  
+  /* Float the link section to the right */
+  .header-right {
+    float: right;
+  }
+  
+  /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+  @media screen and (max-width: 500px) {
+    .header a {
+      float: none;
+      margin-right: 4px;
+      text-align: left;
+      text-shadow: none;
+      border: none;
+    }
+
+  }
+  

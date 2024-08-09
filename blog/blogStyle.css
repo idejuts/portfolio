@@ -1,0 +1,53 @@
+:root {
+    --light-bg-color: #adc7ff;
+    --dark-bg-color: #2c3047;
+    --logo-font: "Imbue", serif;
+  }
+  
+  html {
+    /* background-color: var(--dark-bg-color); */
+    background-color: var(--light-bg-color);
+    margin: 0;
+    padding: 0;
+    color: white; 
+    /* background-image: repeating-linear-gradient(to right, rgba(71, 74, 255, 0.1), rgba(71, 74, 255, 0.01) 1px, transparent 1px, transparent);
+  background-size: 1vw 1vw; */
+  }
+  
+  .hero {
+    font-family: var(--logo-font);
+  }
+  
+  #logo_image {
+    display: flex;
+
+
+    max-width: 800px;
+    height: auto;
+    padding-bottom: 5vw;
+  }
+  
+  .hero_position {
+    position: relative;
+  
+  }
+  
+  .logo_text {
+    text-shadow: 2px 20px 0px rgba(200, 120, 120, 0.78);
+    position: absolute; /* Position the text absolutely within the container */
+    top: 50%; /* Place the text at the vertical center */
+    left: 50%; /* Place the text at the horizontal center */
+    transform: translate(
+      -50%,
+      -50%
+    ); /* Center the text both horizontally and vertically */
+  
+    font-size: calc(22px + 1vw); /* Set the font size */
+    font-weight: bold; /* Set the font weight */
+    text-align: center; /* Align the text to the center */
+  }
+  
+  .special_text {
+    text-shadow: 3px 3px 0px rgba(200, 120, 120, 0.78);
+  }
+  

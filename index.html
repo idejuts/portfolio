@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
     <title>Shapo</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,9 +22,9 @@
             <nav id="navbar">
         <a href="#default" class="logo">#UnderConstruction</a>
         <div class="header-right">
-          <a href="#home">Projects</a>
-          <a href="#about">Blog</a>
-          <a href="#about">CV</a>
+          <a href="#Projects">Projects</a>
+          <a href="/blog" target="_blank">Blog</a>
+          <a href="/CV/CV_MarisPP.pdf" target="_blank">CV</a>
         </div>
     </nav>
       </div>
@@ -54,98 +55,46 @@
 <div class="wrapper">
 
     <div class="header appear">
-      <h1 class="header__title">Portfolio</h1>
+      <h1 id="Projects" class="header__title">Portfolio</h1>
       <h2 class="header__subtitle">...In progress...</h2>
     </div>
+
+
   
     <div class="cards">
-  
-      <div class=" card [ is-collapsed ] appear">
-        <div class="card__inner [ js-expander ]">
-          <span><div class="video-background">
-            <video loop muted playsinline>
-              <source src="TM.mp4" type="video/mp4">
-        
-            </video>
-          </div></span>
-          <i class="fa fa-folder-o"></i>
-        </div>
-        <div class="card__expander">
-          <i class="fa fa-close [ js-collapser ]"></i>
-          <a href="https://idejuts.github.io/timemachine">Timemachine.lv</a> 
-          Prototips vietājam uzņēmumam izklaides sfērā. <br>
-          Sākot ar copywriting, dizainu un beidzot ar tehnisko izpildījumu.
-        </div>
+      <div class="card-content TMcard">
+      <h2 class="card-title">Timemachine.lv</h2> 
+      <div class="video-background">
+        <video autoplay loop muted playsinline>
+          <source src="TM.mp4" type="video/mp4">
+        </video>
       </div>
-  
-      
-  
-  
-      <div class=" card [ is-collapsed ] ">
-        <div class="card__inner [ js-expander ]">
-          <span>Card</span>
-          <i class="fa fa-folder-o"></i>
-        </div>
-        <div class="card__expander">
-          <i class="fa fa-close [ js-collapser ]"></i>
-          Expander
-        </div>
+  <p class="card-body">Prototype for a local business in entertainement sphere. Everything, from copywriting to design and code.</p>
+      <a href="https://idejuts.github.io/timemachine">Explore</a>
       </div>
-  
-      <div class=" card [ is-collapsed ] ">
-        <div class="card__inner [ js-expander ]">
-          <span>Card</span>
-          <i class="fa fa-folder-o"></i>
-        </div>
-        <div class="card__expander">
-          <i class="fa fa-close [ js-collapser ]"></i>
-          Expander
-        </div>
-      </div>
-  
-      <div class=" card [ is-collapsed ] ">
-        <div class="card__inner [ js-expander ]">
-          <span>Card</span>
-          <i class="fa fa-folder-o"></i>
-        </div>
-        <div class="card__expander">
-          <i class="fa fa-close [ js-collapser ]"></i>
-          Expander
-        </div>
-      </div>
-  
-      <div class=" card [ is-collapsed ] ">
-        <div class="card__inner [ js-expander ]">
-          <span>Card</span>
-          <i class="fa fa-folder-o"></i>
-        </div>
-        <div class="card__expander">
-          <i class="fa fa-close [ js-collapser ]"></i>
-          Expander
-        </div>
-      </div>
-  
-      <div class=" card [ is-collapsed ] ">
-        <div class="card__inner [ js-expander ]">
-          <span>Card</span>
-          <i class="fa fa-folder-o"></i>
-        </div>
-        <div class="card__expander">
-          <i class="fa fa-close [ js-collapser ]"></i>
-          Expander
-        </div>
-      </div>
-  
-    </div>
-  
-  </div>
-
     
 
-                <img class="appear" src="bauh.jpeg" alt="">
-            </div>
+      <div class="card-content ">
+        <h2 class="card-title">Botanical Rhapsody</h2> 
+        <img src="botanical.png"><p class="card-body">Quickie for a cat and some plants.</p>
+        <a href="https://idejuts.github.io/botanical">Explore</a>
+
         </div>
-    </div>    
+      
+
+        <div class="card-content">
+          <h2 class="card-title">More cooking...</h2> <p class="card-body">Bits and pieces are all over the place for the moment...</p>
+          <a href="/blog" target="_blank">Explore</a>
+          </div>
+ 
+            
+  
+    <h2>Companies I haven't worked for:</h2> <div class="companies"><img src="amazon.svg" alt=""> <img src="google.svg" alt=""> <img src="ikea.svg" alt=""> <img src="nike.svg" alt=""> <img src="bitcoin.svg" alt="">
+  </div>
+ 
+  
+                <img class="appear" src="bauh.jpeg" alt="">
+      
 </div>
 <script src="scripts.js"></script>
 </body>
