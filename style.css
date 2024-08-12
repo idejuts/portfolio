@@ -344,12 +344,7 @@ img:hover {
   width: calc(150px + 7svw);
 }
 
-.video-background :hover {
-  transform: scale(107%);
-  transition: 1s;
-  overflow: hidden;
 
-}
 
 .cards {
   display: flex;
@@ -370,6 +365,8 @@ img:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: blue;
 }
 
 .card-content {
@@ -398,7 +395,7 @@ video {
   display: block;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .hero-bg {
     height: 70svh;
   }
@@ -429,4 +426,9 @@ video {
   .header a {
     text-decoration: underline;
   }
+
+  .companies img {
+ width: calc(20px + 1svw);
+  }
+
 }
