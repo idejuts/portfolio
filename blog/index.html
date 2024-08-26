@@ -1,33 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Idejuts - IT Portfolio</title>
-    <link rel="stylesheet" href="blogStyle.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Bungee+Inline&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Imbue:opsz,wght@10..100,100..900&family=Reddit+Mono:wght@200..900&family=Workbench&display=swap" rel="stylesheet"> </head>
-  <body>
-    <main>
-      <div class="hero">
-        <div class="hero_position">
-          <img id="logo_image" src="idejuts_logo.webp" alt="Logo" />
-          <h1 class="logo_text">
-            idejuts
-          </h1>
-        </div>
-        <h2>
-          Mani sauc <span class="special_text">Māris Pēterhens-Pētersons</span>,
-          <br />
-          esmu Programmēšanas amatieris, <br />
-          un šī ir mana Smilšu kaste jeb <span class="special_text">Portfolio</span>.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="blogStyle.css">
+</head>
+<body>
 
-          <br /><br />
-          Un es neticu, ka kāds šo lasa... Bet ja lasa... Es atvainojos, šeit nav, ko lasīt...
-        </h2>
-      </div>
-    </main>
-    <script src="myscripts.js"></script>
-  </body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Idejuts</h1>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>Not sure if anyone is reading but... My name is Māris Pēterhens-Pētersons, I am an amateur web dev and someone who just likes to try things...</p>
+            <p>These are the early stages of showing off my learning jorney through web development, design and everything in between and far apart...</p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2>Blog</h2>
+
+            <article class="post">
+              <h3 class="post-title">Drag n Drop sortables with save state</h3>
+              <p class="post-meta">Posted on August 12, 2024 by Māris</p>
+              <div class="post-content">
+                  <p>Mobile friendly, using JS</p>
+                  <p>Try it out here: <a href="https://idejuts.github.io/incremental/" target="_blank">https://idejuts.github.io/incremental/"</a>  </p>
+                  <p>Drag and drop implementations, especially allowing for mobile/touch systems can be quite finnicky, as it turns out. So here is some experimenting, with a potential incremental web game in my mind.</p>
+                  
+                </div>
+              <button class="read-more">Read more...</button>
+          </article>
+
+            <article class="post">
+                <h3 class="post-title">AIdeas</h3>
+                <p class="post-meta">Posted on August 12, 2024 by Māris</p>
+                <div class="post-content">
+                    <p>Getting help from AI</p>
+                    <p>Well...</p>
+                    <p>In hac habitasse platea dictumst. <img src="idejuts_logo.webp" alt="idejuts"> Vivamus luctus, est vel gravida placerat, dui elit dapibus felis, sit amet ullamcorper magna risus vel risus.</p>
+                    
+                  </div>
+                <button class="read-more">Read more...</button>
+            </article>
+            <article class="post">
+                <h3 class="post-title">Idejuts - making of an alias</h3>
+                <p class="post-meta">Posted on August 12, 2024 by Māris</p>
+                <div class="post-content">
+                    <p>I like ideas. I like playing with ideas...</p>
+                    <p>"Idejuts" is an alias or a concept that stems from words "idea" and "idiot"... They can be quite related after all...</p>
+                    <p>Proin sit amet tortor a metus varius feugiat ut et magna. Curabitur pretium vestibulum tincidunt.</p>
+                </div>
+                <button class="read-more">Read more...</button>
+            </article>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <p>If you have any questions or would like to get in touch, feel free to reach out.</p>
+            <form action="#" method="post" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
 </html>
